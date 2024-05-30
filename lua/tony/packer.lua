@@ -33,4 +33,5 @@ return require('packer').startup(function()
     }
     use 'windwp/nvim-ts-autotag'
     use 'lewis6991/gitsigns.nvim'
+    use 'tpope/vim-fugitive'
 end)
