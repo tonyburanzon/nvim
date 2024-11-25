@@ -60,7 +60,7 @@ return {
                 ['<C-n>'] = cmp.mapping({
                   c = function()
                     if cmp.visible() then
-                      cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                      cmp.select_next_item(cmp_select)
                     else
                       cmp.complete()
                     end
