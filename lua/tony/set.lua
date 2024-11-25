@@ -22,5 +22,7 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 8
 
 vim.g.mapleader = " "
+vim.opt.signcolumn = 'yes'
+
 
 vim.opt.mouse = ""
