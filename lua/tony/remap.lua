@@ -1,10 +1,9 @@
 vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
 vim.keymap.set("n", "<leader>o", "<C-o>")
-vim.keymap.set("n", "<leader>l", "<C-l>")
 vim.keymap.set("n", "<leader>]", "<C-]>")
-vim.keymap.set("n", "<leader>lsr", ":LspRestart<CR>")
+vim.keymap.set("n", "<leader>lsr", "<cmd>LspRestart<CR>")
 
-vim.keymap.set("n", "<leader>%", ":vsp<CR>")
+vim.keymap.set("n", "<leader>%", "<cmd>vsp<CR>")
 vim.keymap.set("n", "<leader>h", "<C-w>h")
 vim.keymap.set("n", "<leader>j", "<C-w>j")
 vim.keymap.set("n", "<leader>k", "<C-w>k")
@@ -19,5 +18,9 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
+vim.keymap.set("n", "<C-u>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-i>", "<cmd>cprev<CR>zz")
+
 vim.keymap.set("n", "Q", "<nop>")
+-- Disable vims built in auto in favor of nvim-cmp
 vim.keymap.set("i", "<C-n>", "<nop>")
