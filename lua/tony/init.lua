@@ -1,4 +1,3 @@
---require("tony.packer")
 require("tony.set")
 require("tony.remap")
 require("tony.lazy_init")
