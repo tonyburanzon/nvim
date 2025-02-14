@@ -16,8 +16,9 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("XDG_CACHE_HOME") .. "/.vim/undodir//"
 vim.opt.undofile = true
+vim.opt.undodir = os.getenv("XDG_CACHE_HOME") .. "/.vim/undodir//"
+vim.g.netrw_home = os.getenv("XDG_CACHE_HOME") .. "/.vim/netrw//"
 
 vim.opt.scrolloff = 8
 
