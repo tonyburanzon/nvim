@@ -18,8 +18,8 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
-vim.keymap.set("n", "<C-u>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-i>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<C-[>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-]>", "<cmd>cprev<CR>zz")
 
 vim.keymap.set("n", "Q", "<nop>")
 -- Disable vims built in auto in favor of nvim-cmp
