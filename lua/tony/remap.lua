@@ -1,7 +1,7 @@
 vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
 vim.keymap.set("n", "<leader>o", "<C-o>")
 vim.keymap.set("n", "<leader>i", "<C-i>")
-vim.keymap.set("n", "<leader>lsr", "<cmd>LspRestart<CR>")
+vim.keymap.set("n", "<leader>rlsp", "<cmd>LspRestart<CR>")
 
 vim.keymap.set("n", "<leader>%", "<cmd>vsp<CR>")
 vim.keymap.set("n", "<leader>h", "<C-w>h")
