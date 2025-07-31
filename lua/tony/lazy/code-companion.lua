@@ -1,22 +1,33 @@
 return {
   'olimorris/codecompanion.nvim',
-  opts = {
-    strategies = {
-      chat = {
-        adapter = {
-          name = 'copilot',
-          model = 'claude-sonnet-4',
-        },
-        roles = {
-          user = 'Tony',
-        },
-      },
-    },
-  },
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
   },
+  config = function()
+    require('codecompanion').setup({
+      strategies = {
+        chat = {
+          adapter = {
+            name = 'copilot',
+            model = 'claude-sonnet-4',
+          },
+          roles = {
+            user = 'Tony',
+          },
+        },
+      },
+      display = {
+        chat = {
+          window = {
+            layout = 'vertical',
+            position = "right",
+            width = 0.4,
+          },
+        },
+      }
+    })
+  end,
   keys = {
     {
       '<leader>cc',
