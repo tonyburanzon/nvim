@@ -1,0 +1,32 @@
+return {
+--  "folke/snacks.nvim",
+--  priority = 1000,
+--  lazy = false,
+--  ---@type snacks.Config
+--  config = function()
+--    require('snacks').setup({
+--      indent = {
+--        indent = {
+--          priority = 1,
+--          enabled = true,
+--          only_scope = true,
+--          only_current = true,
+--        },
+--        scope = {
+--          enabled = true
+--        },
+--        --chunk = {
+--        --  enabled = true,
+--        --  char = {
+--        --    horizontal = '',
+--        --    vertical = '│',
+--        --    corner_top = '',
+--        --    corner_bottom = '',
+--        --    arrow = '',
+--        --  },
+--        --},
+--        animate = {enabled = false},
+--      },
+--    })
+--  end
+}
