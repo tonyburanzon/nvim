@@ -25,3 +25,20 @@ vim.keymap.set("n", "<leader>]", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "Q", "<nop>")
 -- Disable vims built in auto in favor of nvim-cmp
 vim.keymap.set("i", "<C-n>", "<nop>")
+
+-- Toggle zoom function
+local function toggle_zoom()
+  if vim.t.zoomed and vim.t.zoomed == true then
+    vim.cmd(vim.t.zoom_winrestcmd)
+    vim.t.zoomed = false
+  else
+    vim.t.zoom_winrestcmd = vim.fn.winrestcmd()
+    vim.cmd('resize')
+    vim.cmd('vertical resize')
+    vim.t.zoomed = true
+  end
+end
+
+-- Create the command and keymap
+vim.api.nvim_create_user_command('ToggleZoom', toggle_zoom, {})
+vim.keymap.set('n', '<leader>z', toggle_zoom, { desc = 'Toggle window zoom' })
