@@ -23,3 +23,12 @@ autocmd('LspAttach', {
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
     end
 })
+
+autocmd("User", {
+  group = TonyGroup,
+  pattern = "TroubleToggle",
+  callback = function()
+    require("trouble").send_to_qflist("workspace_diagnostics")
+  end,
+})
+
