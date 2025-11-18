@@ -22,7 +22,7 @@ return {
       workspaces = {
         {
           name = "personal",
-          path = "~/vaults/personal",
+          path = "~/vaults/notebook",
         }
       },
       disable_frontmatter = true,
