@@ -8,9 +8,25 @@ return {
             install_dir = vim.fn.stdpath("data") .. "/site",
         })
 
+        local ignored_filetypes = {
+            netrw = true,
+            trouble = true,
+            TelescopePrompt = true,
+            harpoon = true,
+            undotree = true,
+            qf = true,
+            lazy = true,
+            mason = true,
+            fugitive = true,
+            fugitiveblame = true,
+            gitcommit = true,
+        }
+
         -- Auto-install missing parsers, enable highlighting and indentation
         vim.api.nvim_create_autocmd("FileType", {
             callback = function(args)
+                if ignored_filetypes[vim.bo[args.buf].filetype] then return end
+
                 local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
                 if not lang then return end
 
@@ -20,7 +36,10 @@ return {
                 end
 
                 pcall(vim.treesitter.start, args.buf)
-                vim.bo[args.buf].indentexpr = "v:lua.vim.treesitter.foldexpr()"
+                -- vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                if vim.treesitter.query.get(lang, "indents") then
+                    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end
             end,
         })
 

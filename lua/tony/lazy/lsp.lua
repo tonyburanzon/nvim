@@ -19,6 +19,40 @@ return {
             vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities())
 
+        -- vim.api.nvim_create_autocmd('FileType', {
+        --     pattern = 'kotlin',
+        --     callback = function(args)
+        --         local root_dir = vim.fs.root(args.buf, {
+        --             'settings.gradle.kts', 'settings.gradle', 'build.gradle.kts', 'build.gradle', 'pom.xml',
+        --         })
+        --         if not root_dir then return end
+        --         local hash = vim.fn.sha256(root_dir):sub(1, 12)
+        --         local base = vim.fn.expand('~/.local/share/kotlin-lsp/projects/') .. hash
+        --         vim.lsp.start({
+        --             name = 'kotlin_lsp',
+        --             cmd = {
+        --                 'sh', '-c',
+        --                 'IJ_JAVA_OPTIONS="-Didea.config.path=' .. base .. '/config'
+        --                     .. ' -Didea.system.path=' .. base .. '/system" exec kotlin-lsp --stdio',
+        --             },
+        --             root_dir = root_dir,
+        --             capabilities = capabilities,
+        --         })
+        --     end,
+        -- })
+
+        -- vim.api.nvim_create_user_command('KotlinLspClearIndex', function()
+        --     local client = vim.lsp.get_clients({ name = 'kotlin_lsp' })[1]
+        --     if not client then
+        --         vim.notify('kotlin_lsp not running', vim.log.levels.WARN)
+        --         return
+        --     end
+        --     local hash = vim.fn.sha256(client.root_dir):sub(1, 12)
+        --     local path = vim.fn.expand('~/.local/share/kotlin-lsp/projects/') .. hash
+        --     vim.fn.system('rm -rf ' .. vim.fn.shellescape(path))
+        --     vim.notify('Cleared kotlin-lsp index for ' .. client.root_dir .. '. Restart Neovim to reindex.')
+        -- end, {})
+
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
@@ -31,18 +65,39 @@ return {
                         capabilities = capabilities
                     }
                 end,
+                -- ["kotlin_lsp"] = function() end, -- managed by FileType autocmd above
                 ["lua_ls"] = function()
                   local lspconfig = require("lspconfig")
                   lspconfig.lua_ls.setup {
                     capabilities = capabilities,
                     settings = {
-                    Lua = {
-                    diagnostics = {
-                    globals = { "vim", "it", "describe", "before_each", "after_each" },
+                      Lua = {
+                        workspace = {
+                          checkThirdParty = false,
+                        },
+                        diagnostics = {
+                          globals = { "vim", "it", "describe", "before_each", "after_each" },
+                        }
                       }
                     }
-                  }
                 }
+                end,
+                ["vtsls"] = function()
+                  require("lspconfig").vtsls.setup {
+                    capabilities = capabilities,
+                    settings = {
+                      typescript = {
+                        preferences = {
+                          importModuleSpecifier = 'non-relative',
+                        },
+                      },
+                      javascript = {
+                        preferences = {
+                          importModuleSpecifier = 'non-relative',
+                        },
+                      },
+                    },
+                  }
                 end,
             }
         })
