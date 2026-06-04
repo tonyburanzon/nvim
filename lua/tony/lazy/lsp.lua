@@ -55,52 +55,43 @@ return {
 
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-            },
-            handlers = {
-                function(server_name) -- default handler (optional)
-
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
-                    }
-                end,
-                -- ["kotlin_lsp"] = function() end, -- managed by FileType autocmd above
-                ["lua_ls"] = function()
-                  local lspconfig = require("lspconfig")
-                  lspconfig.lua_ls.setup {
-                    capabilities = capabilities,
-                    settings = {
-                      Lua = {
-                        workspace = {
-                          checkThirdParty = false,
-                        },
-                        diagnostics = {
-                          globals = { "vim", "it", "describe", "before_each", "after_each" },
-                        }
-                      }
-                    }
-                }
-                end,
-                ["vtsls"] = function()
-                  require("lspconfig").vtsls.setup {
-                    capabilities = capabilities,
-                    settings = {
-                      typescript = {
-                        preferences = {
-                          importModuleSpecifier = 'non-relative',
-                        },
-                      },
-                      javascript = {
-                        preferences = {
-                          importModuleSpecifier = 'non-relative',
-                        },
-                      },
-                    },
-                  }
-                end,
-            }
+            ensure_installed = { "lua_ls", "vtsls" },
+            automatic_enable = false,
         })
+
+        vim.lsp.config("*", {
+            capabilities = capabilities,
+        })
+
+        vim.lsp.config("lua_ls", {
+            settings = {
+                Lua = {
+                    workspace = { checkThirdParty = false },
+                    diagnostics = {
+                        globals = { "vim", "it", "describe", "before_each", "after_each" },
+                    },
+                },
+            },
+        })
+
+        vim.lsp.config("vtsls", {
+            settings = {
+                typescript = {
+                    preferences = {
+                        importModuleSpecifier = "non-relative",
+                        importModuleSpecifierEnding = "minimal",
+                    },
+                },
+                javascript = {
+                    preferences = {
+                        importModuleSpecifier = "non-relative",
+                        importModuleSpecifierEnding = "minimal",
+                    },
+                },
+            },
+        })
+
+        vim.lsp.enable({ "lua_ls", "vtsls" })
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
