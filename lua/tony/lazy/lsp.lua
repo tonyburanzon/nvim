@@ -55,7 +55,7 @@ return {
 
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = { "lua_ls", "vtsls" },
+            ensure_installed = { "lua_ls", "vtsls", "kotlin_lsp" },
             automatic_enable = false,
         })
 
@@ -91,7 +91,7 @@ return {
             },
         })
 
-        vim.lsp.enable({ "lua_ls", "vtsls" })
+        vim.lsp.enable({ "lua_ls", "vtsls", "kotlin_lsp" })
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
